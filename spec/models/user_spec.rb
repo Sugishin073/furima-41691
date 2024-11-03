@@ -3,12 +3,18 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-
   describe 'ユーザー新規登録' do
-    it 'nicknameが空では登録できない' do
-      @user.nickname = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include "Nickname can't be blank"
+    context 'ユーザ登録ができる時' do
+      it '全ての項目が正しく入力されている場合、登録できる' do
+        expect(@user).to be_valid
+      end
+    end
+    context 'ユーザ登録ができない時' do
+      it 'nicknameが空では登録できない' do
+        @user.nickname = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Nickname can't be blank"
+      end
     end
     it 'emailが空では登録できない' do
       @user.email = ''
