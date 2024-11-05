@@ -7,7 +7,7 @@ const price = () => {
     priceInput.addEventListener("input", () => {
       const inputValue = priceInput.value;
       const tax = Math.floor(inputValue * 0.1); // 手数料を10%と仮定
-      const profit = inputValue - tax;
+      const profit = Math.floor(inputValue - tax);
 
       addTaxDom.innerHTML = `${tax}`;
       profitDom.innerHTML = `${profit}`;
