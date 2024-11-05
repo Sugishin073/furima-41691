@@ -8,8 +8,12 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create!(item_params)
-    redirect_to '/'
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to '/'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
