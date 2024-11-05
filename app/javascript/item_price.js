@@ -1,8 +1,19 @@
-window.addEventListener('turbo:load', () => {
-  console.log("OK");
-});
-const priceInput = document.getElementById("item-price");
-priceInput.addEventListener("input", () => {
-  const inputValue = priceInput.value;
-  console.log(inputValue);
-})
+const price = () => {
+  const priceInput = document.getElementById("item-price");
+  const addTaxDom = document.getElementById("add-tax-price");
+  const profitDom = document.getElementById("profit");
+
+  if (priceInput) {
+    priceInput.addEventListener("input", () => {
+      const inputValue = priceInput.value;
+      const tax = Math.floor(inputValue * 0.1); // 手数料を10%と仮定
+      const profit = inputValue - tax;
+
+      addTaxDom.innerHTML = `${tax}`;
+      profitDom.innerHTML = `${profit}`;
+    });
+  }
+}
+
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);
