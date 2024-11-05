@@ -16,4 +16,7 @@ class User < ApplicationRecord
 
   # 生年月日は必須
   validates :birth_date, presence: true
+
+  has_many :items
+  # has_many :buys
 end
