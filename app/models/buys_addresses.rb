@@ -8,8 +8,11 @@ class BuysAddresses
                               message: 'is invalid' }
     validates :user_id
     validates :post_number, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
+    validates :city
+    validates :house_number
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Must be 10 or 11 digits' }
   end
-  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
   def save
     buy = Buy.create(item_id: item_id, user_id: user_id)

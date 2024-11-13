@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee
   belongs_to :status
   belongs_to :waiting_date
-  # has_one    :buy
+  has_one    :buy
   belongs_to :user
   has_one_attached :image
 
