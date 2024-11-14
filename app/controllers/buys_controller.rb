@@ -1,5 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_sold, only: [:index]
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
@@ -33,5 +34,12 @@ class BuysController < ApplicationController
       card: buy_params[:token], # カードトークン
       currency: 'jpy' # 通貨の種類（日本円）
     )
+  end
+
+  def item_sold
+    @item = Item.find(params[:item_id])
+    return unless current_user.id == @item.user_id || !@item.buy.nil?
+
+    redirect_to root_path
   end
 end

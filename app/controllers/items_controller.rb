@@ -20,6 +20,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    return if @item.buy.nil?
+
+    redirect_to root_path
   end
 
   def update
