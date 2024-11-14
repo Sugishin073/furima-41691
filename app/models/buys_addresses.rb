@@ -3,10 +3,9 @@ class BuysAddresses
   attr_accessor :post_number, :prefecture_id, :city, :house_number, :building_name, :phone_number, :item_id, :token, :user_id
 
   with_options presence: true do
-    validates :item_id,
-              numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1_000_000,
-                              message: 'is invalid' }
+    validates :item_id
     validates :user_id
+    validates :token
     validates :post_number, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
