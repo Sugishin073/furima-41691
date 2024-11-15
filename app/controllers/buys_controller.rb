@@ -1,7 +1,7 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
-  before_action :item_sold, only: [:index]
   before_action :set_item, only: [:create, :item_sold, :index]
+  before_action :item_sold, only: [:index]
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @buy_address = BuysAddresses.new
@@ -39,9 +39,9 @@ class BuysController < ApplicationController
     return unless current_user.id == @item.user_id || !@item.buy.nil?
 
     redirect_to root_path
+  end
 
-    def set_item
-      @item = Item.find(params[:id])
-    end
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
